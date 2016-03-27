@@ -103,7 +103,7 @@ if __name__ == "__main__":
     # parsing command line options
     args = options()
     logger = set_easy_logger(
-        'nome di prova',
+        'ImportUser',
         args.verbosity.upper(),
         args.logfile)
     # Ex:
