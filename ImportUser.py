@@ -31,40 +31,36 @@ def options():
 
 
 def main():
-    # parsing opzioni linea di comando
-    args = options()
-    try:
-        with open(args.FileCsv, 'rb') as a, open(args.OutputFile, 'w') as b:
-            reader = csv.DictReader(a)
-            try:
-                for row in reader:
-                    statement1 = (  # spezzo riga lunga
-                        "tool user-manager user add disabled=no "
-                        "username=%s "
-                        "password=%s "
-                        "customer=admin"
-                        "\n"
-                        % (row['Login'], row['Password'])
-                    )
-                    statement2 = (
-                        'tool user-manager user '
-                        'create-and-activate-profile "%s" '
-                        'profile=%s '
-                        'customer=admin'
-                        '\n'
-                        % (row['Login'], args.ProfileName)
-                    )
-                    b.write(statement1)
-                    b.write(statement2)
-            except csv.Error as e:
-                exit(
-                    'file %s, line %d: %s' %
-                    (args.FileCsv, reader.line_num, e)
-                )
-    except IOError as e:
-        print e
-        exit(-1)
+    with open(args.FileCsv, 'rb') as a, open(args.OutputFile, 'w') as b:
+        reader = csv.DictReader(a)
+        for row in reader:
+            statement1 = (  # spezzo riga lunga
+                "tool user-manager user add disabled=no "
+                "username=%s "
+                "password=%s "
+                "customer=admin"
+                "\n"
+                % (row['Login'], row['Password'])
+            )
+            statement2 = (
+                'tool user-manager user '
+                'create-and-activate-profile "%s" '
+                'profile=%s '
+                'customer=admin'
+                '\n'
+                % (row['Login'], args.ProfileName)
+            )
+            b.write(statement1)
+            b.write(statement2)
 
 
 if __name__ == "__main__":
-    main()
+    # parsing command line options
+    args = options()
+    try:
+        main()
+    except Exception as e:
+        print "BIG TROUBLE!"
+        print e
+        print "quitting with error.."
+        exit(-1)
