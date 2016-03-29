@@ -88,7 +88,7 @@ def main():
             statement2 = (
                 'tool user-manager user '
                 'create-and-activate-profile "%s" '
-                'profile=%s '
+                'profile="%s" '
                 'customer=admin'
                 '\n'
                 % (row['Login'], args.ProfileName)
