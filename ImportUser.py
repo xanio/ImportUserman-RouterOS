@@ -39,7 +39,6 @@ def set_easy_logger(name, verbosity, logfile=False):
     # finally, return the logger
     return logger
 
-
 def options():
     parser = argparse.ArgumentParser(
         prog='ImportUser',
