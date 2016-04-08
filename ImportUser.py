@@ -9,7 +9,6 @@ __email__ = "xanio@nemesilabs.org"
 import csv     # imports the csv module
 import argparse  # imports the argparse module
 
-
 def set_easy_logger(name, verbosity, logfile=False):
     '''
     Easy setup for a logger
